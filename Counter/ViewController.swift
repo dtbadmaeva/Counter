@@ -10,17 +10,17 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var counter: UILabel!
-    @IBOutlet weak var historyTextView: UITextView!
+    @IBOutlet weak var historyTextView: UITextView! //«У меня в коде есть переменная historyTextView, которая указывает на текстовое поле на экране (UITextView)
     
     var cnt = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabel()
-        historyTextView.text = "История изменений:"
+        historyTextView.text = "История изменений:" //обращаюсь не ко всему объекту UITextView, а только к его содержимому — тексту внутри (.text)
     }
 
-    @IBAction func plusButton(_ sender: UIButton) {
+    @IBAction func plusButton(_ sender: UIButton) { //
         cnt += 1
         updateLabel()
         addHistoryEntry(change: "+1")
@@ -44,19 +44,24 @@ class ViewController: UIViewController {
         addHistoryEntry(change: "Значение сброшено")
     }
         
+    /*
+     cnt — это переменная в коде, которая хранит текущее число счётчика.
+     Пример: cnt = 5
+
+     counter — это метка (UILabel), элемент на экране, который показывает текст пользователю.
+     Например, ты видишь на экране «5».
+     */
     func updateLabel() {
         counter.text = "\(cnt)"
     }
     
     func addHistoryEntry(change: String) {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd.MM.yyyy HH:mm:ss"
-            let dateString = dateFormatter.string(from: Date())
+        let date = Date().formatted(date: .numeric, time: .standard)
+        historyTextView.text += "\n\(date): \(change)" //обращаюсь не ко всему объекту UITextView, а только к его содержимому — тексту внутри (.text)
+    }
 
-            let newEntry = "\n\(dateString): \(change)"
-            historyTextView.text += newEntry
-        }
 
+    
 
 }
 
