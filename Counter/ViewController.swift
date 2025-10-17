@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var counter: UILabel!
     @IBOutlet weak var historyTextView: UITextView! //«У меня в коде есть переменная historyTextView, которая указывает на текстовое поле на экране (UITextView)
     
-    var cnt = 0
+    var count = 0
     
     /*
      – UserDefaults – системный класс iOS для простого постоянного хранилища «ключ → значение».
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        cnt = UserDefaults.standard.integer(forKey: "ValueCounter")
+        count = UserDefaults.standard.integer(forKey: "ValueCounter")
         updateLabel()
         historyTextView.text = "История изменений:" //обращаюсь не ко всему объекту UITextView, а только к его содержимому — тексту внутри (.text)
     }
@@ -44,18 +44,18 @@ class ViewController: UIViewController {
      Отдельно вызывать synchronize() обычно не нужно.
      */
     @IBAction func plusButton(_ sender: UIButton) { //
-        cnt += 1
+        count += 1
         updateLabel()
-        UserDefaults.standard.set(cnt, forKey: "ValueCounter")
+        UserDefaults.standard.set(count, forKey: "ValueCounter")
         addHistoryEntry(change: "+1")
     }
     
     
     @IBAction func minusButton(_ sender: UIButton) {
-        if cnt > 0 {
-            cnt -= 1
+        if count > 0 {
+            count -= 1
             updateLabel()
-            UserDefaults.standard.set(cnt, forKey: "ValueCounter")
+            UserDefaults.standard.set(count, forKey: "ValueCounter")
             addHistoryEntry(change: "-1")
         } else {
             addHistoryEntry(change: "Попытка уменьшить значение счётчика ниже 0")
@@ -64,9 +64,9 @@ class ViewController: UIViewController {
     
     
     @IBAction func resetButton(_ sender: UIButton) {
-        cnt = 0
+        count = 0
         updateLabel()
-        UserDefaults.standard.set(cnt, forKey: "ValueCounter")
+        UserDefaults.standard.set(count, forKey: "ValueCounter")
         addHistoryEntry(change: "Значение сброшено")
     }
         
@@ -78,16 +78,13 @@ class ViewController: UIViewController {
      Например, ты видишь на экране «5».
      */
     func updateLabel() {
-        counter.text = "\(cnt)"
+        counter.text = "\(count)"
     }
     
     func addHistoryEntry(change: String) {
         let date = Date().formatted(date: .numeric, time: .standard)
         historyTextView.text += "\n\(date): \(change)" //обращаюсь не ко всему объекту UITextView, а только к его содержимому — тексту внутри (.text)
     }
-
-
-    
 
 }
 
