@@ -1,0 +1,81 @@
+# === Xcode ===
+#
+# User settings
+xcuserdata/
+*.xcuserstate
+*.xccheckout
+
+# Build products
+build/
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.swiftpm/
+.build/
+Packages/
+Package.pins
+Package.resolved
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+Carthage/Checkouts/
+Carthage/DerivedData/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+fastlane/README.md
+
+# Provisioning profiles and signing
+*.mobileprovision
+*.provisionprofile
+*.cer
+*.p12
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Logs
+*.log
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Temporary files
+*.swp
+*.lock
+*.tmp
+*.bak
+
+# IDE metadata
+.idea/
+.vscode/
+*.xccovreport
+*.xccovarchive
+
+# Archives
+*.xcarchive
+
+# Simulator data
+*.simstate
+
+# SwiftUI previews cache
+*.preview-thumbnails
+*.preview-thumbnails/
+
