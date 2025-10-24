@@ -9,10 +9,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var counter: UILabel!
-    @IBOutlet weak var historyTextView: UITextView! //«У меня в коде есть переменная historyTextView, которая указывает на текстовое поле на экране (UITextView)
+    @IBOutlet private weak var counter: UILabel!
+    @IBOutlet private weak var historyTextView: UITextView! //«У меня в коде есть переменная historyTextView, которая указывает на текстовое поле на экране (UITextView)
     
-    var count = 0
+    private var count = 0
     
     /*
      – UserDefaults – системный класс iOS для простого постоянного хранилища «ключ → значение».
@@ -32,6 +32,22 @@ class ViewController: UIViewController {
         updateLabel()
         historyTextView.text = "История изменений:" //обращаюсь не ко всему объекту UITextView, а только к его содержимому — тексту внутри (.text)
     }
+    
+    /*
+     cnt — это переменная в коде, которая хранит текущее число счётчика.
+     Пример: cnt = 5
+
+     counter — это метка (UILabel), элемент на экране, который показывает текст пользователю.
+     Например, ты видишь на экране «5».
+     */
+    private func updateLabel() {
+        counter.text = "\(count)"
+    }
+    
+    private func addHistoryEntry(change: String) {
+        let date = Date().formatted(date: .numeric, time: .standard)
+        historyTextView.text += "\n\(date): \(change)" //обращаюсь не ко всему объекту UITextView, а только к его содержимому — тексту внутри (.text)
+    }
 
     /*
      .set(_:forKey:) — метод записи значения по строковому ключу.
@@ -43,7 +59,7 @@ class ViewController: UIViewController {
      Library/Preferences/<bundle-id>.plist.
      Отдельно вызывать synchronize() обычно не нужно.
      */
-    @IBAction func plusButton(_ sender: UIButton) { //
+    @IBAction private func plusButton(_ sender: UIButton) { //
         count += 1
         updateLabel()
         UserDefaults.standard.set(count, forKey: "ValueCounter")
@@ -51,7 +67,7 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func minusButton(_ sender: UIButton) {
+    @IBAction private func minusButton(_ sender: UIButton) {
         if count > 0 {
             count -= 1
             updateLabel()
@@ -63,27 +79,11 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func resetButton(_ sender: UIButton) {
+    @IBAction private func resetButton(_ sender: UIButton) {
         count = 0
         updateLabel()
         UserDefaults.standard.set(count, forKey: "ValueCounter")
         addHistoryEntry(change: "Значение сброшено")
-    }
-        
-    /*
-     cnt — это переменная в коде, которая хранит текущее число счётчика.
-     Пример: cnt = 5
-
-     counter — это метка (UILabel), элемент на экране, который показывает текст пользователю.
-     Например, ты видишь на экране «5».
-     */
-    func updateLabel() {
-        counter.text = "\(count)"
-    }
-    
-    func addHistoryEntry(change: String) {
-        let date = Date().formatted(date: .numeric, time: .standard)
-        historyTextView.text += "\n\(date): \(change)" //обращаюсь не ко всему объекту UITextView, а только к его содержимому — тексту внутри (.text)
     }
 
 }
